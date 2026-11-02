@@ -13,6 +13,21 @@ const { title, description = 'Conheça a Paróquia São Pedro, seus horários, s
 	<head>
 		<meta charset="UTF-8" />
 		<script is:inline>
+			const legacyPageRoutes = {
+				'1612': '/sacramentos/matrimonio/',
+				'1625': '/pastorais/',
+				'1677': '/pastorais/coral/',
+				'1683': '/pastorais/liturgia/',
+				'1685': '/pastorais/mcj/',
+				'1706': '/pastorais/clj/',
+				'1721': '/sacramentos/batismo/',
+				'1731': '/sacramentos/crisma/',
+			};
+			const legacyPageId = new URLSearchParams(window.location.search).get('page_id');
+			if (legacyPageId && legacyPageRoutes[legacyPageId]) {
+				window.location.replace(legacyPageRoutes[legacyPageId]);
+			}
+
 			const savedTheme = localStorage.getItem('sao-pedro-theme');
 			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 			document.documentElement.dataset.theme = savedTheme === 'light' || savedTheme === 'dark'
