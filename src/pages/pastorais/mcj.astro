@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { parish } from '../../data/site';
+---
+<BaseLayout title="Movimento de Casais Jovens">
+	<PageIntro eyebrow="Pastorais e movimentos" title="Movimento de Casais Jovens (MCJ)" description="Um caminho de espiritualidade, partilha e apoio à vida matrimonial e familiar." />
+	<section class="content-section"><div class="container content-copy">
+		<p>O MCJ é voltado a casais casados na Igreja que desejam fortalecer a vida matrimonial e familiar à luz do Evangelho. O núcleo da Paróquia São Pedro iniciou sua história em 1975.</p>
+		<p>O Encontro de Casais Jovens é apresentado como porta de entrada para o movimento. Datas de encontros e reuniões devem ser consultadas com a paróquia, pois a página atual contém informações de 2025.</p>
+		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Consultar próximos encontros</a>
+	</div></section>
+</BaseLayout>

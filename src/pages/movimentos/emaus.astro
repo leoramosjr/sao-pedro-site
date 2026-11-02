@@ -1,0 +1,11 @@
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { parish } from '../../data/site';
+---
+<BaseLayout title="Emaús">
+	<PageIntro eyebrow="Movimentos" title="Emaús" description="Conheça o movimento Emaús da Paróquia São Pedro." />
+	<section class="content-section"><div class="container content-copy">
+		<p>Para saber mais sobre as atividades, os encontros e as formas de participação no movimento, entre em contato com a secretaria paroquial.</p>
+		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Perguntar sobre Emaús</a>
+	</div></section>
+</BaseLayout>

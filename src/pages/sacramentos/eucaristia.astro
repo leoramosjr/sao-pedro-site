@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { parish } from '../../data/site';
+import { eucharistFaqs } from '../../data/sacrament-faqs';
+---
+<BaseLayout title="Eucaristia">
+	<PageIntro eyebrow="Sacramentos" title="Eucaristia" description="A Eucaristia está no centro da vida de fé e da celebração comunitária." />
+	<section class="content-section"><div class="container content-copy">
+		<p>A Eucaristia está no centro da vida cristã e da celebração comunitária. Para informações sobre a catequese e a Primeira Eucaristia, consulte as respostas abaixo ou fale com a secretaria.</p>
+		<FaqAccordion title="Dúvidas sobre a Eucaristia" items={eucharistFaqs} />
+		<div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a secretaria</a><a class="button button-secondary" href="/horarios/">Ver horários de missa</a></div>
+	</div></section>
+</BaseLayout>

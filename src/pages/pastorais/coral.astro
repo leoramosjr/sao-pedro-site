@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { parish } from '../../data/site';
+---
+<BaseLayout title="Coral São Pedro">
+	<PageIntro eyebrow="Pastorais e movimentos" title="Coral São Pedro" description="Uma tradição de música sacra a serviço da oração e das celebrações." />
+	<section class="content-section"><div class="container content-copy">
+		<p>Fundado em 7 de agosto de 1931, o Coral São Pedro participa de celebrações especiais, como a Vigília Pascal, a Novena de São Pedro e o Natal. Também participa da missa das 11h no primeiro domingo de cada mês, conforme informação publicada pela paróquia.</p>
+		<p>O coral acolhe novos integrantes. A página atual convida interessados a conversar com a coordenação e realizar um teste vocal.</p>
+		<div class="info-note"><p>Confirme com a paróquia os horários de ensaio e o contato atualizado da coordenação.</p></div>
+		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Tenho interesse em participar</a>
+	</div></section>
+</BaseLayout>

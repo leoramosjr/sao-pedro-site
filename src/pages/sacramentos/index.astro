@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { sacraments } from '../../data/site';
+---
+<BaseLayout title="Sacramentos">
+	<PageIntro eyebrow="Vida sacramental" title="Sacramentos" description="A comunidade acompanha os fiéis em diferentes momentos da caminhada cristã. Escolha um sacramento para ver as orientações disponíveis." />
+	<section class="content-section"><div class="container card-grid">
+		{ sacraments.map((item) => <a class="card" href={item.href}><p class="card-kicker">Paróquia São Pedro</p><h3>{item.title}</h3><p>{item.description}</p><span class="text-link">Ver orientações <span aria-hidden="true">→</span></span></a>) }
+	</div></section>
+</BaseLayout>

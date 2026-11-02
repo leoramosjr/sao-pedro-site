@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { parish } from '../../data/site';
+---
+<BaseLayout title="Matrimônio">
+	<PageIntro eyebrow="Sacramentos" title="Matrimônio" description="A preparação começa com uma conversa com a paróquia e o acompanhamento do padre." />
+	<section class="content-section"><div class="container content-copy">
+		<h2>Como iniciar</h2>
+		<ol><li>Entre em contato com a secretaria para iniciar o agendamento de uma entrevista com o padre.</li><li>Na entrevista, a equipe orienta sobre o processo de habilitação, documentos e próximos passos.</li><li>Após a habilitação, a data da celebração pode ser combinada com a paróquia.</li></ol>
+		<h2>Documentos e preparação</h2>
+		<p>A página atual menciona documento de identidade, certidões de nascimento, comprovantes de residência e certidões de Batismo. O curso de noivos pode ser feito na paróquia ou em outra comunidade, conforme disponibilidade.</p>
+		<div class="info-note"><p>Datas, disponibilidade de celebração e lista de documentos devem ser confirmadas diretamente com a secretaria.</p></div>
+		<div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Iniciar conversa pelo WhatsApp</a><a class="button button-secondary" href="/contato/">Ver contatos</a></div>
+	</div></section>
+</BaseLayout>

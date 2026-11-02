@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { parish } from '../../data/site';
+import { confirmationFaqs } from '../../data/sacrament-faqs';
+---
+<BaseLayout title="Crisma">
+	<PageIntro eyebrow="Sacramentos" title="Crisma" description="A Crisma fortalece a caminhada cristã e a participação na vida da Igreja." />
+	<section class="content-section"><div class="container content-copy">
+		<div class="info-note"><p>As respostas abaixo resumem as informações disponíveis no site da paróquia. Confirme com a secretaria os requisitos, períodos de inscrição e horários atuais.</p></div>
+		<FaqAccordion title="Dúvidas sobre a Crisma" items={confirmationFaqs} />
+		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Consultar a secretaria</a>
+	</div></section>
+</BaseLayout>

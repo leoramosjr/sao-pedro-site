@@ -1,0 +1,31 @@
+---
+import { massSchedule, parish } from '../data/site';
+import { Image } from 'astro:assets';
+import logo from '../assets/images/sp_logo.png';
+---
+
+<footer class="site-footer">
+	<div class="container footer-main">
+		<div class="footer-about">
+			<a class="brand brand-light" href="/">
+				<span class="brand-emblem"><Image src={logo} alt="" width={48} height={48} /></span>
+				<span class="brand-copy"><strong>Paróquia</strong><span>São Pedro</span></span>
+			</a>
+			<p>Uma comunidade de fé, oração e serviço em Porto Alegre.</p>
+		</div>
+		<div>
+			<h2>Missas</h2>
+			<ul class="footer-list">
+				{massSchedule.map((schedule) => <li><span>{schedule.day}</span><strong>{schedule.times}</strong></li>)}
+			</ul>
+		</div>
+		<div>
+			<h2>Contato</h2>
+			<address>{parish.address}</address>
+			<a href={parish.phoneHref}>{parish.phone}</a>
+			<a href={`mailto:${parish.email}`}>{parish.email}</a>
+			<a href={parish.whatsappHref} target="_blank" rel="noreferrer">WhatsApp da secretaria</a>
+		</div>
+	</div>
+	<div class="footer-bottom"><div class="container"><span>© {new Date().getFullYear()} Paróquia São Pedro</span><a href="/contato/">Como chegar e falar conosco</a></div></div>
+</footer>

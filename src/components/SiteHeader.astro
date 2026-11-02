@@ -1,0 +1,110 @@
+---
+import { navigation, parish, pastorals, movements, sacraments } from '../data/site';
+import { Image } from 'astro:assets';
+import logo from '../assets/images/sp_logo_transparent.png';
+const currentPath = Astro.url.pathname;
+---
+
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+<header class="site-header">
+	<div class="container header-inner">
+		<a class="brand" href="/" aria-label={`${parish.name} — página inicial`}>
+			<span class="brand-emblem"><Image src={logo} alt="" width={48} height={48} /></span>
+			<span class="brand-copy"><strong>Paróquia</strong><span>São Pedro</span></span>
+		</a>
+		<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+			<span class="menu-toggle-lines" aria-hidden="true"><i></i><i></i><i></i></span>
+			<span class="sr-only">Abrir menu</span>
+		</button>
+		<nav id="primary-navigation" class="primary-navigation" aria-label="Navegação principal">
+			{navigation.map((item) => {
+				const movementPaths = ['/movimentos/', '/pastorais/clj/', '/pastorais/mcj/'];
+				const isMovementRoute = movementPaths.some((path) => currentPath.startsWith(path));
+				const active = item.href === '/'
+					? currentPath === '/'
+					: item.href === '/pastorais/'
+						? currentPath.startsWith('/pastorais/') && !isMovementRoute
+						: item.href === '/movimentos/'
+							? isMovementRoute
+							: currentPath.startsWith(item.href);
+				const menuItems = item.href === '/sacramentos/'
+					? sacraments
+					: item.href === '/pastorais/'
+						? pastorals
+						: item.href === '/movimentos/'
+							? movements
+							: null;
+				if (menuItems) {
+					return (
+						<div class="nav-dropdown">
+							<a class="nav-dropdown-trigger" href={item.href} aria-current={active ? 'page' : undefined}>{item.label}</a>
+							<div class="nav-dropdown-menu">
+								{menuItems.map((menuItem) => (
+									<a href={menuItem.href} aria-current={currentPath === menuItem.href ? 'page' : undefined}>{menuItem.title}</a>
+								))}
+							</div>
+						</div>
+					);
+				}
+				return <a href={item.href} aria-current={active ? 'page' : undefined}>{item.label}</a>;
+			})}
+		</nav>
+		<button class="theme-toggle" type="button" aria-label="Ativar tema escuro" aria-pressed="false">
+			<svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.6 8.6 0 1 0 20.2 15.5Z" /></svg>
+			<svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></svg>
+		</button>
+	</div>
+</header>
+
+<script>
+	const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
+	const themeButton = document.querySelector<HTMLButtonElement>('.theme-toggle');
+	const navigationElement = document.querySelector<HTMLElement>('#primary-navigation');
+	const menuLabel = menuButton?.querySelector<HTMLElement>('.sr-only');
+
+	if (menuButton && navigationElement) {
+		const closeMenu = () => {
+			menuButton.setAttribute('aria-expanded', 'false');
+			if (menuLabel) menuLabel.textContent = 'Abrir menu';
+			navigationElement.classList.remove('is-open');
+		};
+
+		menuButton.addEventListener('click', () => {
+			const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+			menuButton.setAttribute('aria-expanded', String(!isOpen));
+			if (menuLabel) menuLabel.textContent = isOpen ? 'Abrir menu' : 'Fechar menu';
+			navigationElement.classList.toggle('is-open', !isOpen);
+		});
+
+		navigationElement.addEventListener('click', (event) => {
+			if ((event.target as HTMLElement).closest('a')) closeMenu();
+		});
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape') closeMenu();
+		});
+	}
+
+	if (themeButton) {
+		const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+		const updateThemeButton = () => {
+			const isDark = document.documentElement.dataset.theme === 'dark';
+			themeButton.setAttribute('aria-pressed', String(isDark));
+			themeButton.setAttribute('aria-label', isDark ? 'Ativar tema claro' : 'Ativar tema escuro');
+		};
+
+		updateThemeButton();
+		themeButton.addEventListener('click', () => {
+			const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+			document.documentElement.dataset.theme = nextTheme;
+			localStorage.setItem('sao-pedro-theme', nextTheme);
+			updateThemeButton();
+		});
+
+		systemTheme.addEventListener('change', (event) => {
+			if (localStorage.getItem('sao-pedro-theme')) return;
+			document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
+			updateThemeButton();
+		});
+	}
+</script>

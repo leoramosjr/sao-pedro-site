@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { massSchedule, officeHours, parish } from '../../data/site';
+---
+<BaseLayout title="Horários e localização">
+	<PageIntro eyebrow="Planeje sua visita" title="Horários e localização" description="Será uma alegria receber você na Paróquia São Pedro. Confira os horários e encontre a igreja em Porto Alegre." />
+	<section class="content-section"><div class="container hours-layout">
+		<div class="hours-card"><p class="eyebrow">Celebrações</p><h2>Horários de missa</h2><ul class="schedule-list">{massSchedule.map((item) => <li><span>{item.day}</span><strong>{item.times}</strong></li>)}</ul></div>
+		<div class="hours-card"><p class="eyebrow">Atendimento</p><h2>Secretaria paroquial</h2><ul class="schedule-list">{officeHours.map((item) => <li><span>{item.day}</span><strong>{item.times}</strong></li>)}</ul><p class="info-note">Os horários são os publicados atualmente pela paróquia e podem ser atualizados.</p><a class="button" href={parish.phoneHref}>Ligar para a secretaria</a></div>
+		<div class="hours-card"><p class="eyebrow">Como chegar</p><h2>Estamos no bairro Floresta</h2><p>{parish.address}</p><a class="button button-secondary" href="https://maps.google.com/?q=Av.+Crist%C3%B3v%C3%A3o+Colombo,+1629,+Porto+Alegre" target="_blank" rel="noreferrer">Abrir no mapa <span aria-hidden="true">↗</span></a></div>
+		<div class="hours-card"><p class="eyebrow">Precisa de ajuda?</p><h2>Fale conosco</h2><p>Entre em contato com a secretaria para confirmar horários e tirar dúvidas.</p><a class="text-link" href={parish.whatsappHref} target="_blank" rel="noreferrer">Iniciar conversa no WhatsApp <span aria-hidden="true">→</span></a></div>
+	</div></section>
+</BaseLayout>

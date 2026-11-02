@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { parish } from '../../data/site';
+import { baptismFaqs } from '../../data/sacrament-faqs';
+---
+<BaseLayout title="Batismo">
+	<PageIntro eyebrow="Sacramentos" title="Batismo" description="A iniciação cristã começa com o Batismo. Saiba como iniciar a preparação com a secretaria paroquial." />
+	<section class="content-section"><div class="container content-copy">
+		<div class="info-note"><p>As respostas abaixo se baseiam nas informações publicadas pela paróquia. Datas, documentos e valores podem mudar; confirme os detalhes com a secretaria antes de iniciar a preparação.</p></div>
+		<FaqAccordion title="Dúvidas sobre o Batismo" items={baptismFaqs} />
+		<div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Tirar dúvidas pelo WhatsApp</a><a class="button button-secondary" href="/contato/">Ver outros contatos</a></div>
+	</div></section>
+</BaseLayout>

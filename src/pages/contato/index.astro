@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { parish } from '../../data/site';
+---
+<BaseLayout title="Contato" description="Entre em contato com a secretaria da Paróquia São Pedro, em Porto Alegre.">
+	<PageIntro eyebrow="Estamos à disposição" title="Fale com a paróquia" description="Entre em contato com a secretaria ou venha nos visitar. Será um prazer acolher você." />
+	<section class="content-section"><div class="container contact-layout">
+		<div class="contact-card"><p class="eyebrow">Secretaria paroquial</p><h2>Entre em contato</h2>
+			<div class="contact-detail"><span>Telefone</span><a href={parish.phoneHref}>{parish.phone}</a></div>
+			<div class="contact-detail"><span>WhatsApp</span><a href={parish.whatsappHref} target="_blank" rel="noreferrer">Iniciar conversa</a></div>
+			<div class="contact-detail"><span>E-mail</span><a href={`mailto:${parish.email}`}>{parish.email}</a></div>
+			<div class="contact-detail"><span>Endereço</span><strong>{parish.address}</strong></div>
+			<a class="button" href="https://maps.google.com/?q=Av.+Crist%C3%B3v%C3%A3o+Colombo,+1629,+Porto+Alegre" target="_blank" rel="noreferrer">Como chegar <span aria-hidden="true">↗</span></a>
+		</div>
+		<div class="contact-card"><p class="eyebrow">Atendimento</p><h2>Horários da secretaria</h2><p>Terça a sexta, das 9h às 11h45 e das 14h às 17h45.</p><div class="map-placeholder"><p>Av. Cristóvão Colombo, 1629<br />Porto Alegre — RS</p></div></div>
+	</div></section>
+</BaseLayout>
