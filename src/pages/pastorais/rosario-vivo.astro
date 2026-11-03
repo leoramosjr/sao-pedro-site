@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { parish } from '../../data/site';
+---
+<BaseLayout title="Rosário Vivo">
+	<PageIntro eyebrow="Pastorais" title="Rosário Vivo" description="Um convite à oração e à devoção mariana na comunidade." />
+	<section class="content-section"><div class="container content-copy">
+		<p>O Rosário Vivo é um espaço de oração e devoção mariana na comunidade paroquial.</p>
+		<p>Para conhecer a organização do grupo e saber como participar, entre em contato com a secretaria paroquial.</p>
+		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Perguntar sobre o Rosário Vivo</a>
+	</div></section>
+</BaseLayout>

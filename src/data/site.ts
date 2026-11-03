@@ -29,6 +29,8 @@ export const pastorals = [
 	{ title: 'Pastoral da Liturgia', href: '/pastorais/liturgia/', description: 'Equipes que preparam e animam as celebrações da comunidade.' },
 	{ title: 'PASCOM', href: '/pastorais/pascom/', description: 'Pastoral da Comunicação da Paróquia São Pedro.' },
 	{ title: 'Coral São Pedro', href: '/pastorais/coral/', description: 'Música sacra e serviço às celebrações paroquiais.' },
+	{ title: 'Pastoral do Dízimo', href: '/pastorais/dizimo/', description: 'Partilha e corresponsabilidade na missão da comunidade.' },
+	{ title: 'Rosário Vivo', href: '/pastorais/rosario-vivo/', description: 'Um convite à oração e à devoção mariana na comunidade.' },
 ];
 
 export const movements = [
