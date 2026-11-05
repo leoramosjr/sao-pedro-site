@@ -1,12 +1,159 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import domZeno from '../../assets/images/dom-zeno.jpg';
+import padreRomeu from '../../assets/images/padre-romeu.png';
+import padreLivio from '../../assets/images/padre-livio.png';
+import padreLuciano from '../../assets/images/padre-luciano.png';
+import monsenhorTarcisio from '../../assets/images/monsenhor-tarcisio.jpg';
+import lottermannFontana from '../../assets/images/lottermann-fontana.jpeg';
+import { parishHistory } from '../../data/parish-history';
+
+const clergy = [
+  { name: 'Monsenhor Emílio Lottermann', role: 'Primeiro cura e pároco', period: '1917–1964' },
+  { name: 'Padre Emílio Weizemann', role: 'Pároco', period: '1964–1966' },
+  { name: 'Monsenhor Atílio Fontana', role: 'Pároco', period: '1967–1984' },
+  { name: 'Padre José Inácio Steffen', role: 'Pároco', period: 'Desde 1984; término a confirmar' },
+  { name: 'Padre Zeno Hastenteufel', role: 'Vigário paroquial', period: '1973–1975', photo: domZeno },
+  { name: 'Padre Hugo Büttenbender', role: 'Pároco', period: 'Período a confirmar' },
+  { name: 'Monsenhor Tarcísio Pedro Scherer', role: 'Vigário paroquial', period: '2013–2019', photo: monsenhorTarcisio },
+  { name: 'Padre Luciano da Costa Massullo', role: 'Pároco', period: 'Período a confirmar', photo: padreLuciano },
+  { name: 'Padre Lívio Masuero', role: 'Pároco', period: '2023–atualmente', photo: padreLivio, active: true },
+  { name: 'Padre Miguel Angel Giménez Molinari', role: 'Vigário paroquial', period: 'Período a confirmar' },
+  { name: 'Padre José Romeu Maldaner', role: 'Vigário paroquial', period: 'Início a confirmar', photo: padreRomeu, active: true },
+];
 ---
-<BaseLayout title="A paróquia">
-	<PageIntro eyebrow="Paróquia São Pedro" title="Uma comunidade de fé em Porto Alegre" description="Um espaço de oração, celebração e encontro para pessoas e famílias da cidade." />
-	<section class="content-section"><div class="container content-copy">
-		<p>A história da comunidade de São Pedro começa no século XIX. A origem da capelinha remonta a 1887, quando Eduardo Azevedo de Souza Filho doou um terreno e uma imagem de São Pedro Apóstolo para a construção da primeira igreja.</p>
-		<p>Hoje, a paróquia reúne pessoas em torno da oração, dos sacramentos e do serviço à comunidade.</p>
-		<div class="contact-strip"><a class="button" href="/paroquia/historia/">Conheça nossa história</a><a class="button button-secondary" href="/pastorais/">Encontre um grupo</a></div>
-	</div></section>
+<BaseLayout title="Nossa história">
+  <PageIntro eyebrow="Paróquia São Pedro" title="Uma história de fé em Porto Alegre" description="Conheça as origens da nossa comunidade e da igreja que há gerações acolhe os fiéis no bairro Floresta." />
+  <section class="content-section">
+    <div class="container history-layout">
+      <article class="history-copy">
+        {parishHistory.map((event) => (
+          <section class="history-event" id={event.id} data-history-marker aria-labelledby={event.id + "-title"}>
+            <p class="history-year">{event.years}</p>
+            <h2 id={event.id + "-title"}>{event.title}</h2>
+            {event.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            {'image' in event && event.image && <figure class="history-figure">
+              <Image src={event.image} alt={event.alt} widths={[360, 720, 1080]} sizes="(max-width: 760px) 90vw, 65vw" loading="lazy" />
+              <figcaption>{event.caption}</figcaption>
+            </figure>}
+            {event.id === 'renovacao' && <figure class="history-figure">
+              <Image src={lottermannFontana} alt="Monsenhor Emílio Lottermann, à esquerda, e Monsenhor Atílio Fontana nas escadarias da igreja." loading="lazy" />
+              <figcaption>Monsenhor Emílio Lottermann e Monsenhor Atílio Fontana. Fotografia sem data, do acervo paroquial.</figcaption>
+            </figure>}
+          </section>
+        ))}
+        <div class="history-source">
+          <p>Fontes históricas: pesquisa histórica e iconográfica do pedido de tombamento da Igreja São Pedro (2023), com base nos Livros de Tombo e no acervo paroquial; <a href="https://www.repositorio.jesuita.org.br/bitstream/handle/UNISINOS/3902/Anna%20Paula%20Boneberg%20Nascimento%20dos%20Santos_.pdf?isAllowed=y&amp;sequence=1">dissertação de Anna Paula Boneberg Nascimento dos Santos (Unisinos, 2014)</a>; <a href="https://pt.wikipedia.org/wiki/Igreja_de_S%C3%A3o_Pedro_(Porto_Alegre)">Wikipédia</a>; <a href="https://www.avesol.org.br/2019/06/novena-de-sao-pedro-e-marcada-por.html">AVESOL, sobre o centenário</a>; e <a href="https://www.arquipoa.com/noticias/novos-parocos-sacerdotes-assumem-paroquias-na-arquidiocese">Arquidiocese de Porto Alegre, sobre a posse de 2023</a>. O relato do concurso do hino foi compartilhado pela comunidade.</p>
+          <p>Imagens históricas reproduzidas do documento de 2023: igreja por volta de 1922 (p. 76), igreja em 1930 (p. 82), fachada sem data, anterior às reformas de 1946 (p. 87), igreja em 1966 (p. 92) e Monsenhores Lottermann e Fontana (p. 93). A numeração corresponde às páginas impressas da pesquisa. A fotografia da capela primitiva também está disponível no <a href="https://commons.wikimedia.org/wiki/File:Primeira_capela_de_S%C3%A3o_Pedro_de_Porto_Alegre.jpg">Wikimedia Commons</a>.</p>
+          <p>Retrato de Dom Zeno: <a href="https://commons.wikimedia.org/wiki/File:Dom_Zeno.JPG">Pvaf / Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, com recorte para exibição.</p>
+        </div>
+        <a class="text-link" href="/pastorais/">Conheça nossas pastorais <span aria-hidden="true">→</span></a>
+      </article>
+      <aside class="history-aside">
+        <div class="history-sidebar-sticky">
+        <nav class="history-milestones" aria-label="Marcos da nossa história">
+          <h2>Marcos da nossa história</h2>
+          <ol class="timeline">
+            {parishHistory.map((event) => <li><a href={'#' + event.id} data-timeline-link><strong>{event.years}</strong><span>{event.label}</span></a></li>)}
+          </ol>
+        </nav>
+        <section class="clergy-section" aria-labelledby="clergy-title">
+          <h2 id="clergy-title">Párocos e vigários</h2>
+          <p class="clergy-intro">Alguns dos sacerdotes que acompanharam nossa comunidade.</p>
+          <ul class="clergy-list">
+            {clergy.map((person) => (
+              <li class:list={["clergy-card", { "clergy-card-active": "active" in person && person.active }]}>
+                <div class="clergy-photo">{'photo' in person && person.photo ? <Image src={person.photo} alt={person.name} loading="lazy" /> : <svg aria-hidden="true" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="17" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M9 41c1-8 7-13 15-13s14 5 15 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>}</div>
+                <div class="clergy-details"><p class="clergy-role">{person.role}{"active" in person && person.active && <span class="clergy-active">Em atuação</span>}</p><h3>{person.name}</h3><p>{person.period}</p></div>
+              </li>
+            ))}
+          </ul>
+        </section>
+        </div>
+      </aside>
+    </div>
+  </section>
+
 </BaseLayout>
+<style>
+  .history-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .history-copy { max-width: 740px; line-height: 1.8; }
+  .history-copy h2, .history-milestones h2 { color: var(--brand-dark); font-family: 'Quattrocento', Georgia, serif; line-height: 1.2; }
+  .history-copy h2 { margin: 0 0 1rem; font-size: clamp(26px, 3vw, 34px); }
+  .history-copy h2:first-child { margin-top: 0; }
+  .history-event + .history-event { margin-top: 3.5rem; }
+  .history-copy .history-year { color: var(--brand); font-weight: 700; letter-spacing: .06em; margin-bottom: .5rem; }
+  .history-copy p { margin: 0 0 1rem; }
+  .history-figure { margin: 2rem 0; }
+  .history-figure img { display: block; width: 100%; height: auto; border-radius: 16px; }
+  .history-figure figcaption { margin-top: .6rem; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+  .history-copy [data-history-marker] { scroll-margin-top: 110px; }
+  .history-aside { align-self: stretch; }
+  .history-sidebar-sticky { position: sticky; top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; scrollbar-width: thin; }
+  .history-milestones { padding: 1.5rem; border: 1px solid var(--line); border-radius: 16px; }
+  .history-milestones h2 { font-size: 1.35rem; margin: 0 0 1.25rem; }
+  .timeline { --progress: 0px; position: relative; list-style: none; margin: 0; padding: 0 0 0 1.4rem; }
+  .timeline::before, .timeline::after { content: ''; position: absolute; left: 5px; top: .55rem; width: 2px; }
+  .timeline::before { height: calc(100% - 1.1rem); background: var(--line); }
+  .timeline::after { height: var(--progress); max-height: calc(100% - 1.1rem); background: var(--brand); transition: height .15s linear; }
+  .timeline li { position: relative; padding: 0 0 1.1rem; }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before { content: ''; position: absolute; left: calc(-1.4rem + 1px); top: .4rem; width: 10px; height: 10px; border-radius: 50%; background: var(--line); z-index: 1; }
+  .timeline li.is-active::before, .timeline li.is-past::before { background: var(--brand); }
+  .timeline a { display: block; color: var(--muted); text-decoration: none; font-size: .9rem; line-height: 1.4; }
+  .timeline a:hover, .timeline a[aria-current] { color: var(--brand-dark); }
+  .timeline strong, .timeline span { display: block; }
+  .timeline strong { color: var(--brand-dark); margin-bottom: .15rem; }
+  .clergy-section { margin-top: 1.5rem; padding: 1.5rem; border: 1px solid var(--line); border-radius: 16px; }
+  .clergy-section h2 { margin: 0; color: var(--brand-dark); font-family: 'Quattrocento', Georgia, serif; font-size: 1.35rem; line-height: 1.2; }
+  .clergy-intro { color: var(--muted); font-size: .9rem; margin: .75rem 0 1.25rem; line-height: 1.5; }
+  .clergy-list { list-style: none; padding: 0; margin: 0; }
+  .clergy-card { display: flex; align-items: flex-start; gap: .85rem; padding: 1rem 0; border-top: 1px solid var(--line); }
+  .clergy-card-active { background: var(--accent-soft); border-radius: 10px; padding: .85rem; margin: .25rem -.5rem; }
+  .clergy-active { display: inline-block; margin-left: .4rem; padding: .15rem .4rem; border-radius: 999px; background: var(--brand); color: var(--surface); font-size: .6rem; letter-spacing: 0; text-transform: none; }
+  .clergy-photo { flex: 0 0 62px; display: grid; place-items: center; width: 62px; height: 72px; border-radius: 8px; background: var(--accent-soft); color: var(--brand); overflow: hidden; }
+  .clergy-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .clergy-photo svg { width: 32px; height: 32px; opacity: .55; }
+  .clergy-details h3 { margin: .15rem 0 .35rem; color: var(--brand-dark); font-family: 'Quattrocento', Georgia, serif; font-size: 1.05rem; line-height: 1.25; }
+  .clergy-details p { margin: 0 0 .35rem; color: var(--muted); font-size: .8rem; line-height: 1.4; }
+  .clergy-details .photo-credit { font-size: .7rem; }
+  .clergy-details .clergy-role { color: var(--brand); font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .history-source { font-size: .9rem; color: var(--muted); }
+  @media (max-width: 760px) { .history-layout { grid-template-columns: 1fr; } .history-aside { grid-row: 1; } .history-sidebar-sticky { position: static; max-height: none; overflow: visible; } }
+</style>
+
+<script>
+  const markers = Array.from(document.querySelectorAll<HTMLElement>('[data-history-marker]'));
+  const timeline = document.querySelector<HTMLElement>('.timeline');
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-timeline-link]'));
+  let scheduled = false;
+  function updateTimeline() {
+    scheduled = false;
+    if (!timeline || markers.length !== links.length || !links.length) return;
+    const threshold = Math.min(window.innerHeight * 0.35, 260);
+    let active = 0;
+    for (let i = 0; i < markers.length; i++) if (markers[i].getBoundingClientRect().top <= threshold) active = i;
+    links.forEach((link, i) => {
+      link.parentElement?.classList.toggle('is-active', i === active);
+      link.parentElement?.classList.toggle('is-past', i < active);
+      if (i === active) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
+    });
+    const first = links[0].parentElement, current = links[active].parentElement, next = links[active + 1]?.parentElement;
+    if (!first || !current) return;
+    let progress = current.offsetTop - first.offsetTop;
+    if (next) {
+      const start = markers[active].getBoundingClientRect().top, end = markers[active + 1].getBoundingClientRect().top;
+      const fraction = Math.max(0, Math.min(1, (threshold - start) / Math.max(1, end - start)));
+      progress += (next.offsetTop - current.offsetTop) * fraction;
+    }
+    timeline.style.setProperty('--progress', progress + 'px');
+  }
+  function scheduleUpdate() { if (!scheduled) { scheduled = true; requestAnimationFrame(updateTimeline); } }
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate);
+  window.addEventListener('load', scheduleUpdate);
+  updateTimeline();
+</script>
+

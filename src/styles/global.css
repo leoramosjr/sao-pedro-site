@@ -155,8 +155,8 @@ html[data-theme='dark'] .tithe-panel p { color: var(--muted); }
 html[data-theme='dark'] .story-panel { background: #382319; }
 html[data-theme='dark'] .button:hover { background: #4b2d21; }
 
-.page-intro { padding: clamp(75px, calc(7vw + 25px), 102px) 0 42px; background: linear-gradient(135deg, #f0f1e9, #f8f7f1 75%); }
-html[data-theme='dark'] .page-intro { background: linear-gradient(135deg, #302720, #211b17 75%); }
+.page-intro { padding: clamp(75px, calc(7vw + 25px), 102px) 0 42px; background: linear-gradient(135deg, #ead9cb, #f1e6db 75%); }
+html[data-theme='dark'] .page-intro { background: linear-gradient(135deg, #493025, #35261e 75%); }
 .page-intro h1 { font-family: 'Quattrocento', Georgia, serif; font-size: clamp(40px, 5vw, 60px); font-weight: 700; }
 .intro-description { max-width: 700px; margin: 30px 0 0; color: var(--muted); font-size: 18px; }
 .content-section { padding: 44px 0 84px; }
