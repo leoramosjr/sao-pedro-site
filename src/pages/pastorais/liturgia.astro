@@ -1,14 +1,4 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageIntro from '../../components/PageIntro.astro';
-import { parish } from '../../data/site';
+import CommunityPage from '../../components/CommunityPage.astro';
 ---
-<BaseLayout title="Pastoral da Liturgia">
-	<PageIntro eyebrow="Pastorais" title="Pastoral da Liturgia" description="A liturgia reúne a comunidade para celebrar a fé e participar da vida da Igreja." />
-	<section class="content-section"><div class="container content-copy">
-		<p>A Pastoral da Liturgia envolve a equipe de liturgia, as equipes de celebração e o ministério de música. Junto ao pároco, seus integrantes colaboram na preparação das celebrações e em momentos de formação para a comunidade.</p>
-		<p>As equipes incluem leitores, salmistas, comentaristas, instrumentistas e cantores.</p>
-		<div class="info-note"><p>As datas de reunião publicadas anteriormente eram de 2025. Consulte a secretaria para saber a programação atual.</p></div>
-		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Perguntar sobre participação</a>
-	</div></section>
-</BaseLayout>
+<CommunityPage slug="liturgia" description="A liturgia reúne a comunidade para celebrar a fé e participar da vida da Igreja." />

@@ -1,12 +1,4 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageIntro from '../../components/PageIntro.astro';
-import { parish } from '../../data/site';
+import CommunityPage from '../../components/CommunityPage.astro';
 ---
-<BaseLayout title="PASCOM">
-	<PageIntro eyebrow="Pastorais" title="PASCOM" description="Pastoral da Comunicação da Paróquia São Pedro." />
-	<section class="content-section"><div class="container content-copy">
-		<p>Para conhecer as atividades da PASCOM e saber como participar, entre em contato com a secretaria paroquial.</p>
-		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Perguntar sobre a PASCOM</a>
-	</div></section>
-</BaseLayout>
+<CommunityPage slug="pascom" description="Comunicação e evangelização a serviço da comunidade." />

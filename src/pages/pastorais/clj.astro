@@ -1,13 +1,4 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageIntro from '../../components/PageIntro.astro';
-import { parish } from '../../data/site';
+import CommunityPage from '../../components/CommunityPage.astro';
 ---
-<BaseLayout title="Curso de Liderança Juvenil">
-	<PageIntro eyebrow="Pastorais e movimentos" title="Curso de Liderança Juvenil (CLJ)" description="Um espaço para jovens viverem a fé com estudo, oração, amizade e serviço." />
-	<section class="content-section"><div class="container content-copy">
-		<p>O CLJ nasceu na Paróquia São Pedro há mais de 50 anos e hoje é um movimento arquidiocesano. Seus encontros semanais abordam a fé, a Sagrada Escritura e temas do cotidiano juvenil.</p>
-		<p>A caminhada também inclui retiros e momentos de formação. A página da paróquia orienta os interessados a procurar o grupo pelo Instagram <strong>@cljsaopedro</strong> ou pelo telefone paroquial.</p>
-		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a paróquia</a>
-	</div></section>
-</BaseLayout>
+<CommunityPage slug="clj" description="Um espaço para jovens viverem a fé com estudo, oração, amizade e serviço." />

@@ -1,16 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import icon from '../../assets/images/sacramentos/matrimonio.svg';
 import { parish } from '../../data/site';
 ---
 <BaseLayout title="Matrimônio">
-	<PageIntro eyebrow="Sacramentos" title="Matrimônio" description="A preparação começa com uma conversa com a paróquia e o acompanhamento do padre." />
+	<PageIntro eyebrow="Sacramentos" title="Matrimônio" icon={icon} quote="Uma aliança de amor e fidelidade para toda a vida." catechismUrl="https://www.vatican.va/archive/cathechism_po/index_new/p2s2cap3_1533-1666_po.html#:~:text=1601." catechismRef="§§ 1601, 1643" />
 	<section class="content-section"><div class="container content-copy">
+    <p>No Matrimônio, os esposos celebram uma aliança de amor e fidelidade, comprometendo-se a construir sua vida juntos à luz da fé.</p>
 		<h2>Como iniciar</h2>
 		<ol><li>Entre em contato com a secretaria para iniciar o agendamento de uma entrevista com o padre.</li><li>Na entrevista, a equipe orienta sobre o processo de habilitação, documentos e próximos passos.</li><li>Após a habilitação, a data da celebração pode ser combinada com a paróquia.</li></ol>
 		<h2>Documentos e preparação</h2>
 		<p>A página atual menciona documento de identidade, certidões de nascimento, comprovantes de residência e certidões de Batismo. O curso de noivos pode ser feito na paróquia ou em outra comunidade, conforme disponibilidade.</p>
 		<div class="info-note"><p>Datas, disponibilidade de celebração e lista de documentos devem ser confirmadas diretamente com a secretaria.</p></div>
-		<div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Iniciar conversa pelo WhatsApp</a><a class="button button-secondary" href="/contato/">Ver contatos</a></div>
+		<div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a secretaria</a></div>
 	</div></section>
 </BaseLayout>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import icon from '../../assets/images/sacramentos/ordem.svg';
+import { parish } from '../../data/site';
+---
+<BaseLayout title="Ordem">
+  <PageIntro eyebrow="Sacramentos" title="Ordem" icon={icon} quote="Uma vida consagrada ao serviço de Deus e do seu povo." catechismUrl="https://www.vatican.va/archive/cathechism_po/index_new/p2s2cap3_1533-1666_po.html#:~:text=1536." catechismRef="§§ 1536, 1581" />
+  <section class="content-section"><div class="container content-copy">
+    <p>Pela Ordem, bispos, padres e diáconos são consagrados para servir ao povo de Deus e à missão da Igreja.</p>
+    <h2>Como saber mais</h2>
+    <p>Para conversar sobre vocação e discernimento, procure a secretaria paroquial.</p>
+    <div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a secretaria</a></div>
+  </div></section>
+</BaseLayout>

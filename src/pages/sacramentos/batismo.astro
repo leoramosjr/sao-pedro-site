@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import icon from '../../assets/images/sacramentos/batismo.svg';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import { parish } from '../../data/site';
 import { baptismFaqs } from '../../data/sacrament-faqs';
 ---
 <BaseLayout title="Batismo">
-	<PageIntro eyebrow="Sacramentos" title="Batismo" description="A iniciação cristã começa com o Batismo. Saiba como iniciar a preparação com a secretaria paroquial." />
+	<PageIntro eyebrow="Sacramentos" title="Batismo" icon={icon} quote="O começo de uma vida nova em Cristo." catechismUrl="https://www.vatican.va/archive/cathechism_po/index_new/p2s2cap1_1210-1419_po.html#:~:text=1212." catechismRef="§§ 1212–1213" />
 	<section class="content-section"><div class="container content-copy">
+    <p>Pelo Batismo, somos acolhidos na vida de Cristo e na comunidade da Igreja, iniciando a caminhada de fé.</p>
 		<div class="info-note"><p>As respostas abaixo se baseiam nas informações publicadas pela paróquia. Datas, documentos e valores podem mudar; confirme os detalhes com a secretaria antes de iniciar a preparação.</p></div>
 		<FaqAccordion title="Dúvidas sobre o Batismo" items={baptismFaqs} />
-		<div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Tirar dúvidas pelo WhatsApp</a><a class="button button-secondary" href="/contato/">Ver outros contatos</a></div>
+		<div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a secretaria</a></div>
 	</div></section>
 </BaseLayout>

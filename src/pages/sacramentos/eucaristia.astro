@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import icon from '../../assets/images/sacramentos/eucaristia.svg';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import { parish } from '../../data/site';
 import { eucharistFaqs } from '../../data/sacrament-faqs';
 ---
 <BaseLayout title="Eucaristia">
-	<PageIntro eyebrow="Sacramentos" title="Eucaristia" description="A Eucaristia está no centro da vida de fé e da celebração comunitária." />
+	<PageIntro eyebrow="Sacramentos" title="Eucaristia" icon={icon} quote="Em comunhão com Cristo, alimento para a vida." catechismUrl="https://www.vatican.va/archive/cathechism_po/index_new/p2s2cap1_1210-1419_po.html#:~:text=1324." catechismRef="§§ 1324, 1391" />
 	<section class="content-section"><div class="container content-copy">
+    <p>Na Eucaristia, celebramos a presença de Cristo e recebemos seu Corpo e Sangue, fortalecendo nossa comunhão com Deus e com a Igreja.</p>
 		<p>A Eucaristia está no centro da vida cristã e da celebração comunitária. Para informações sobre a catequese e a Primeira Eucaristia, consulte as respostas abaixo ou fale com a secretaria.</p>
 		<FaqAccordion title="Dúvidas sobre a Eucaristia" items={eucharistFaqs} />
-		<div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a secretaria</a><a class="button button-secondary" href="/horarios/">Ver horários de missa</a></div>
+		<div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a secretaria</a></div>
 	</div></section>
 </BaseLayout>

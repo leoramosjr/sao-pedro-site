@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import icon from '../../assets/images/sacramentos/uncao.svg';
+import { parish } from '../../data/site';
+---
+<BaseLayout title="Unção dos Enfermos">
+  <PageIntro eyebrow="Sacramentos" title="Unção dos Enfermos" icon={icon} quote="A presença de Cristo que conforta e fortalece na enfermidade." catechismUrl="https://www.vatican.va/archive/cathechism_po/index_new/p2s2cap1_1420-1532_po.html#:~:text=1511." catechismRef="§§ 1511, 1520" />
+  <section class="content-section"><div class="container content-copy">
+    <p>Na Unção dos Enfermos, Cristo oferece conforto, força e esperança a quem enfrenta doença grave ou as fragilidades da idade.</p>
+    <h2>Como saber mais</h2>
+    <p>Para solicitar o sacramento ou receber orientações, entre em contato com a secretaria paroquial.</p>
+    <div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a secretaria</a></div>
+  </div></section>
+</BaseLayout>

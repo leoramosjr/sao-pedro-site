@@ -26,3 +26,33 @@ const { title = 'Perguntas frequentes', items } = Astro.props;
 		))}
 	</div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('.faq-item').forEach((item) => {
+    const summary = item.querySelector('summary');
+    if (!summary) return;
+    let animation: Animation | undefined;
+    let expanded = item.open;
+
+    summary.addEventListener('click', (event) => {
+      event.preventDefault();
+      const startHeight = item.getBoundingClientRect().height;
+      expanded = !expanded;
+      animation?.cancel();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        item.open = expanded;
+        return;
+      }
+      item.open = true;
+      const endHeight = expanded ? item.scrollHeight : summary.offsetHeight;
+      animation = item.animate(
+        [{ height: `${startHeight}px` }, { height: `${endHeight}px` }],
+        { duration: 260, easing: 'ease-in-out' },
+      );
+      animation.onfinish = () => {
+        item.open = expanded;
+        animation = undefined;
+      };
+    });
+  });
+</script>

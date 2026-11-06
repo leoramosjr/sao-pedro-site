@@ -23,6 +23,9 @@ export const sacraments = [
 	{ title: 'Eucaristia', href: '/sacramentos/eucaristia/', description: 'Informações sobre a preparação e a vida eucarística na comunidade.' },
 	{ title: 'Crisma', href: '/sacramentos/crisma/', description: 'Conheça o caminho de preparação para receber o sacramento da Crisma.' },
 	{ title: 'Matrimônio', href: '/sacramentos/matrimonio/', description: 'Saiba como iniciar o processo de preparação para o Matrimônio.' },
+	{ title: 'Ordem', href: '/sacramentos/ordem/', description: 'Conheça o sacramento da Ordem e o serviço à comunidade.' },
+	{ title: 'Confissão', href: '/sacramentos/confissao/', description: 'Saiba mais sobre o sacramento da Reconciliação.' },
+	{ title: 'Unção dos Enfermos', href: '/sacramentos/uncao/', description: 'Conheça o sacramento de conforto e cuidado aos enfermos.' },
 ];
 
 export const pastorals = [
@@ -34,7 +37,7 @@ export const pastorals = [
 ];
 
 export const movements = [
-	{ title: 'ONDA', href: '/movimentos/onda/', description: 'Entre em contato com a secretaria para saber mais sobre o movimento e como participar.' },
+	{ title: 'ONDA', href: '/movimentos/onda/', description: 'Uma caminhada de fé e amizade para pré-adolescentes de 10 a 14 anos.' },
 	{ title: 'Emaús', href: '/movimentos/emaus/', description: 'Entre em contato com a secretaria para saber mais sobre o movimento e como participar.' },
 	{ title: 'Curso de Liderança Juvenil (CLJ)', href: '/pastorais/clj/', description: 'Encontros de fé, formação e ação para jovens.' },
 	{ title: 'Movimento de Casais Jovens (MCJ)', href: '/pastorais/mcj/', description: 'Espiritualidade, partilha e apoio à vida matrimonial e familiar.' },

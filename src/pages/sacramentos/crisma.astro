@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import icon from '../../assets/images/sacramentos/crisma.svg';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import { parish } from '../../data/site';
 import { confirmationFaqs } from '../../data/sacrament-faqs';
 ---
 <BaseLayout title="Crisma">
-	<PageIntro eyebrow="Sacramentos" title="Crisma" description="A Crisma fortalece a caminhada cristã e a participação na vida da Igreja." />
+	<PageIntro eyebrow="Sacramentos" title="Crisma" icon={icon} quote="Fortalecidos pelo Espírito Santo para viver e testemunhar a fé." catechismUrl="https://www.vatican.va/archive/cathechism_po/index_new/p2s2cap1_1210-1419_po.html#:~:text=1303." catechismRef="§ 1303" />
 	<section class="content-section"><div class="container content-copy">
+    <p>Na Crisma, recebemos o dom do Espírito Santo, que fortalece a graça do Batismo e nos anima a viver e testemunhar a fé.</p>
 		<div class="info-note"><p>As respostas abaixo resumem as informações disponíveis no site da paróquia. Confirme com a secretaria os requisitos, períodos de inscrição e horários atuais.</p></div>
 		<FaqAccordion title="Dúvidas sobre a Crisma" items={confirmationFaqs} />
-		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Consultar a secretaria</a>
+		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a secretaria</a>
 	</div></section>
 </BaseLayout>

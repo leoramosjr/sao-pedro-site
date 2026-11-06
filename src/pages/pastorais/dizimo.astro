@@ -1,13 +1,4 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageIntro from '../../components/PageIntro.astro';
-import { parish } from '../../data/site';
+import CommunityPage from '../../components/CommunityPage.astro';
 ---
-<BaseLayout title="Pastoral do Dízimo">
-	<PageIntro eyebrow="Pastorais" title="Pastoral do Dízimo" description="Partilha e corresponsabilidade na missão da comunidade." />
-	<section class="content-section"><div class="container content-copy">
-		<p>A Pastoral do Dízimo convida a comunidade a viver a partilha como expressão de fé e participação na missão da Igreja.</p>
-		<p>Para saber como participar ou obter informações sobre o dízimo na Paróquia São Pedro, entre em contato com a secretaria paroquial.</p>
-		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Perguntar sobre a Pastoral do Dízimo</a>
-	</div></section>
-</BaseLayout>
+<CommunityPage slug="dizimo" description="Partilha e corresponsabilidade na missão da comunidade." />

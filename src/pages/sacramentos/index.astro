@@ -1,11 +1,33 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import { sacraments } from '../../data/site';
+import batismo from '../../assets/images/sacramentos/batismo.svg';
+import eucaristia from '../../assets/images/sacramentos/eucaristia.svg';
+import crisma from '../../assets/images/sacramentos/crisma.svg';
+import matrimonio from '../../assets/images/sacramentos/matrimonio.svg';
+import ordem from '../../assets/images/sacramentos/ordem.svg';
+import confissao from '../../assets/images/sacramentos/confissao.svg';
+import uncao from '../../assets/images/sacramentos/uncao.svg';
+const groups = [
+  { title: 'Sacramentos da iniciação cristã', items: [{ ...sacraments[0], icon: batismo }, { ...sacraments[1], icon: eucaristia }, { ...sacraments[2], icon: crisma }] },
+  { title: 'Sacramentos da vocação', items: [{ ...sacraments[3], icon: matrimonio }, { ...sacraments[4], icon: ordem }] },
+  { title: 'Sacramentos de cura', items: [{ ...sacraments[5], icon: confissao }, { ...sacraments[6], icon: uncao }] },
+];
 ---
 <BaseLayout title="Sacramentos">
-	<PageIntro eyebrow="Vida sacramental" title="Sacramentos" description="A comunidade acompanha os fiéis em diferentes momentos da caminhada cristã. Escolha um sacramento para ver as orientações disponíveis." />
-	<section class="content-section"><div class="container card-grid">
-		{ sacraments.map((item) => <a class="card" href={item.href}><p class="card-kicker">Paróquia São Pedro</p><h3>{item.title}</h3><p>{item.description}</p><span class="text-link">Ver orientações <span aria-hidden="true">→</span></span></a>) }
-	</div></section>
+  <PageIntro eyebrow="Vida sacramental" title="Sacramentos" quote="A graça de Deus acompanha cada etapa da vida cristã." catechismUrl="https://www.vatican.va/archive/cathechism_po/index_new/p2s2cap1_1210-1419_po.html#:~:text=1210." catechismRef="§ 1210" />
+  <div class="content-section"><div class="container sacrament-groups">
+    {groups.map((group) => <section class="sacrament-group"><h2>{group.title}</h2><div class="card-grid">
+      {group.items.map((item) => <a class="card" href={item.href}><div class="sacrament-card-heading"><Image class="sacrament-icon" src={item.icon} alt="" width={48} height={48} /><h3>{item.title}</h3></div><p>{item.description}</p><span class="text-link">Ver orientações <span aria-hidden="true">→</span></span></a>)}
+    </div></section>)}
+  </div></div>
 </BaseLayout>
+<style>
+.sacrament-groups { display: grid; gap: 3.5rem; }
+.sacrament-group h2 { color: var(--brand-dark); font-family: 'Quattrocento', Georgia, serif; font-size: clamp(25px, 3vw, 32px); margin: 0 0 1.25rem; }
+.sacrament-card-heading { display: flex; align-items: center; gap: .75rem; width: 100%; }
+.sacrament-icon { display: block; flex: 0 0 auto; width: auto; max-width: 2rem; height: 2rem; object-fit: contain; object-position: left center; }
+:global(html[data-theme='dark']) .sacrament-icon { filter: invert(1); }
+</style>

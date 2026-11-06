@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import icon from '../../assets/images/sacramentos/confissao.svg';
+import { parish } from '../../data/site';
+---
+<BaseLayout title="Confissão">
+  <PageIntro eyebrow="Sacramentos" title="Confissão" icon={icon} quote="Um encontro com a misericórdia e o perdão de Deus." catechismUrl="https://www.vatican.va/archive/cathechism_po/index_new/p2s2cap1_1420-1532_po.html#:~:text=1422." catechismRef="§§ 1422, 1468" />
+  <section class="content-section"><div class="container content-copy">
+    <p>Na Confissão, também chamada Reconciliação, encontramos o perdão e a misericórdia de Deus e renovamos nossa amizade com Ele.</p>
+    <h2>Como saber mais</h2>
+    <p>Entre em contato com a secretaria para conhecer os horários e as orientações para a Confissão.</p>
+    <div class="contact-strip"><a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Falar com a secretaria</a></div>
+  </div></section>
+</BaseLayout>

@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from './PageIntro.astro';
+import content from '../data/community-content.json';
+import { parish } from '../data/site';
+
+interface Props {
+  slug: keyof typeof content;
+  description: string;
+}
+interface ContentBlock {
+  type: string;
+  html?: string;
+  title?: string;
+  src?: string;
+  alt?: string;
+}
+const { slug, description } = Astro.props;
+const page = content[slug];
+const blocks: ContentBlock[] = page.blocks;
+const isMovement = ['onda', 'clj', 'mcj'].includes(slug);
+const hasOldSchedule = ['onda', 'mcj', 'liturgia'].includes(slug);
+---
+<BaseLayout title={page.title} description={description}>
+  <PageIntro eyebrow={isMovement ? 'Movimentos' : 'Pastorais'} title={page.title} description={description} />
+  <section class="content-section">
+    <article class="container content-copy community-copy">
+      {hasOldSchedule && <aside class="info-note"><p>Este conteúdo foi recuperado do site anterior e inclui a programação de 2025. Consulte os responsáveis ou a secretaria para confirmar as próximas datas e os horários atuais.</p></aside>}
+      {blocks.map(block => block.type === 'image' ? (
+        <figure class:list={['community-image', { 'community-image-code': slug === 'dizimo' }]}>
+          <img src={block.src} alt={block.alt} loading="lazy" decoding="async" />
+        </figure>
+      ) : block.type === 'question' ? (
+        <details class="community-question">
+          <summary>{block.title}</summary>
+          <div set:html={block.html} />
+        </details>
+      ) : <div class="community-text" set:html={block.html} />)}
+      <div class="community-contact">
+        <a class="button" href={parish.whatsappHref} target="_blank" rel="noopener noreferrer">Falar com a secretaria</a>
+      </div>
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .community-copy { color: var(--ink); }
+  .community-image { margin: 2rem 0; }
+  .community-image img { display: block; width: 100%; height: auto; border-radius: 1rem; }
+  .community-image-code img { max-width: 300px; margin-inline: auto; border-radius: 0; }
+  .community-text { overflow-wrap: anywhere; }
+  .community-text :global(p:empty) { display: none; }
+  .community-text :global(a) { text-decoration: underline; text-underline-offset: .2em; }
+  .community-text :global(blockquote) { margin-inline: 0; padding-inline-start: 1.25rem; border-inline-start: 3px solid var(--brand); }
+  .community-question { border-bottom: 1px solid var(--line); padding: 1rem 0; }
+  .community-question summary { cursor: pointer; font-weight: 700; }
+  .community-question > div { padding-top: .75rem; }
+  .community-contact { margin-top: 2rem; }
+</style>

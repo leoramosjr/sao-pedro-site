@@ -1,15 +1,29 @@
 ---
+import type { ImageMetadata } from 'astro';
+
 interface Props {
 	 eyebrow?: string;
 	 title: string;
 	 description?: string;
+	 icon?: ImageMetadata;
+	 quote?: string;
+	 catechismUrl?: string;
+	 catechismRef?: string;
 }
-const { eyebrow, title, description } = Astro.props;
+const { eyebrow, title, description, icon, quote, catechismUrl, catechismRef } = Astro.props;
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const movements = ['/pastorais/clj', '/pastorais/mcj'];
+const parent = movements.includes(path) ? '/movimentos/' : path.split('/').filter(Boolean).length > 1 ? '/' + path.split('/').filter(Boolean)[0] + '/' : '/';
+const parentLabel = parent === '/' ? 'página inicial' : parent === '/paroquia/' ? 'página da paróquia' : parent === '/sacramentos/' ? 'sacramentos' : parent === '/pastorais/' ? 'pastorais' : 'movimentos';
 ---
-<section class="page-intro">
+<section class:list={["page-intro", { "page-intro-with-icon": icon }]}>
 	<div class="container page-intro-inner">
+		{icon && <img class="page-intro-icon" src={icon.src} alt="" aria-hidden="true" />}
+		<div class="page-intro-copy">
+		<a class="page-intro-back" href={parent} aria-label={`Voltar para ${parentLabel}`}><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
 		{eyebrow && <p class="eyebrow">{eyebrow}</p>}
 		<h1>{title}</h1>
-		{description && <p class="intro-description">{description}</p>}
+		{quote ? <div class="intro-quote"><p>“{quote}”</p>{catechismUrl && catechismRef && <a href={catechismUrl} target="_blank" rel="noopener noreferrer" aria-label={`Ver Catecismo, ${catechismRef}`} title="Frase inspirada no Catecismo">{catechismRef}</a>}</div> : description && <p class="intro-description">{description}</p>}
+		</div>
 	</div>
 </section>
