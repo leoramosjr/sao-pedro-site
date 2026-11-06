@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import batismo from '../assets/images/sacramentos/batismo.svg';
+import eucaristia from '../assets/images/sacramentos/eucaristia.svg';
+import crisma from '../assets/images/sacramentos/crisma.svg';
+import matrimonio from '../assets/images/sacramentos/matrimonio.svg';
+import ordem from '../assets/images/sacramentos/ordem.svg';
+import confissao from '../assets/images/sacramentos/confissao.svg';
+import uncao from '../assets/images/sacramentos/uncao.svg';
+
+interface Props {
+  item: { title: string; href: string; description: string };
+}
+const { item } = Astro.props;
+const icons = { batismo, eucaristia, crisma, matrimonio, ordem, confissao, uncao };
+const slug = item.href.split('/').filter(Boolean).at(-1) as keyof typeof icons;
+const icon = icons[slug];
+---
+<a class="card" href={item.href}>
+  <div class="sacrament-card-heading">
+    <Image class="sacrament-icon" src={icon} alt="" width={48} height={48} />
+    <h3>{item.title}</h3>
+  </div>
+  <p>{item.description}</p>
+  <span class="text-link">Ver orientações <span aria-hidden="true">→</span></span>
+</a>
+
+<style>
+  .sacrament-card-heading { display: flex; align-items: center; gap: .75rem; width: 100%; }
+  .sacrament-icon { display: block; flex: 0 0 auto; width: auto; max-width: 2rem; height: 2rem; object-fit: contain; object-position: left center; }
+  :global(html[data-theme='dark']) .sacrament-icon { filter: invert(1); }
+</style>

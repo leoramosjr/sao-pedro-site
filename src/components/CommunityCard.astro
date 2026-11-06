@@ -1,0 +1,12 @@
+---
+interface Props {
+  item: { title: string; href: string; description: string };
+  linkLabel?: string;
+}
+const { item, linkLabel = 'Conheça' } = Astro.props;
+---
+<a class="card" href={item.href}>
+  <h3>{item.title}</h3>
+  <p>{item.description}</p>
+  <span class="text-link">{linkLabel} <span aria-hidden="true">→</span></span>
+</a>

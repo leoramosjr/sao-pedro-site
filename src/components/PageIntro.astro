@@ -16,7 +16,7 @@ const movements = ['/pastorais/clj', '/pastorais/mcj'];
 const parent = movements.includes(path) ? '/movimentos/' : path.split('/').filter(Boolean).length > 1 ? '/' + path.split('/').filter(Boolean)[0] + '/' : '/';
 const parentLabel = parent === '/' ? 'página inicial' : parent === '/paroquia/' ? 'página da paróquia' : parent === '/sacramentos/' ? 'sacramentos' : parent === '/pastorais/' ? 'pastorais' : 'movimentos';
 ---
-<section class:list={["page-intro", { "page-intro-with-icon": icon }]}>
+<section class:list={["page-intro", { "page-intro-with-icon": icon, "page-intro-sacrament": path === '/sacramentos' || path.startsWith('/sacramentos/') }]}>
 	<div class="container page-intro-inner">
 		{icon && <img class="page-intro-icon" src={icon.src} alt="" aria-hidden="true" />}
 		<div class="page-intro-copy">
