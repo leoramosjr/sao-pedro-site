@@ -2,11 +2,120 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import { parish } from '../../data/site';
+import { emausGroups } from '../../data/emaus';
+import { Image } from 'astro:assets';
+// General movement description: https://emaus.org.br/saopaulo/o-movimento/
 ---
 <BaseLayout title="Emaús">
 	<PageIntro eyebrow="Movimentos" title="Emaús" description="Conheça o movimento Emaús da Paróquia São Pedro." />
-	<section class="content-section"><div class="container content-copy">
-		<p>Para saber mais sobre as atividades, os encontros e as formas de participação no movimento, entre em contato com a secretaria paroquial.</p>
-		<a class="button" href={parish.whatsappHref} target="_blank" rel="noreferrer">Perguntar sobre Emaús</a>
+	<section class="content-section"><div class="container emaus-content">
+		<div class="content-copy emaus-introduction">
+			<h2>Uma caminhada de fé e vida em comunidade</h2>
+			<p>O Emaús é um movimento católico de comunidades missionárias dedicado à evangelização dos jovens. Por meio de cursos e da vivência em comunidade, convida a refletir sobre a vida à luz da Palavra de Deus e a aprofundar a formação cristã.</p>
+			<p>Essa caminhada incentiva o encontro com Cristo e a participação na vida da Igreja. Na Paróquia São Pedro, o movimento está presente nos grupos Renova, Kerigma e Betânia.</p>
+		</div>
+		<section class="emaus-groups" aria-labelledby="emaus-groups-title" data-emaus-tabs>
+			<h2 id="emaus-groups-title">Nossos grupos</h2>
+			<div class="emaus-tab-list" role="tablist" aria-label="Grupos do Emaús" hidden>
+				{emausGroups.map((group, index) => <button type="button" role="tab" id={`tab-${group.id}`} aria-controls={`grupo-${group.id}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1}>{group.name}</button>)}
+			</div>
+			{emausGroups.map(group => (
+				<div class="emaus-panel" id={`grupo-${group.id}`} role="region" aria-labelledby={`titulo-${group.id}`} data-emaus-panel>
+					<div class="emaus-group-copy">
+						<p class="eyebrow">Emaús · Paróquia São Pedro</p>
+						<div class="emaus-group-heading">
+							{group.logo && <Image class="emaus-group-logo" src={group.logo.src} alt={group.logo.alt} width={112} height={112} loading="lazy" />}
+							<h3 id={`titulo-${group.id}`}>{group.name}</h3>
+						</div>
+						{group.description.length ? <p>{group.description[0]}</p> : <p class="emaus-pending">A descrição do grupo será adicionada em breve.</p>}
+					</div>
+					{group.photo ? <Image class="emaus-group-photo" src={group.photo.src} alt={group.photo.alt} widths={[360, 720, 1280]} sizes="(max-width: 720px) 90vw, 50vw" loading="lazy" /> : <div class="emaus-photo-placeholder"><span>Foto do grupo {group.name}</span><small>Em breve</small></div>}
+					{group.description.length > 1 && <div class="emaus-group-story">{group.description.slice(1).map(paragraph => <p>{paragraph}</p>)}</div>}
+					{group.coordinators && <section class="emaus-coordinators" aria-labelledby={`coordenacao-${group.id}`}>
+						<h4 id={`coordenacao-${group.id}`}>Coordenação</h4>
+						<dl>{group.coordinators.map(coordinator => <div><dt>{coordinator.role}</dt>{coordinator.names.map(name => <dd>{name}</dd>)}</div>)}</dl>
+					</section>}
+				</div>
+			))}
+		</section>
+		<a class="button" href={parish.whatsappHref} target="_blank" rel="noopener noreferrer">Perguntar sobre Emaús</a>
 	</div></section>
 </BaseLayout>
+
+<style>
+  .emaus-content { display: grid; gap: 2.5rem; justify-items: start; }
+  .emaus-introduction { max-width: 760px; }
+  .emaus-introduction h2 { margin-top: 0; }
+  .emaus-groups { width: 100%; min-width: 0; }
+  .emaus-groups > h2 { margin: 0 0 1.25rem; color: var(--brand-dark); font-family: 'Quattrocento', Georgia, serif; font-size: clamp(26px, 3vw, 34px); line-height: 1.2; }
+  .emaus-tab-list { display: flex; gap: .5rem; padding: .375rem; margin-bottom: 1.25rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); width: fit-content; max-width: 100%; }
+  .emaus-tab-list[hidden], .emaus-panel[hidden] { display: none; }
+  .emaus-tab-list button { min-height: 44px; padding: .65rem 1.5rem; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font-weight: 700; cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+  .emaus-tab-list button:hover { background: var(--accent-soft); color: var(--brand-dark); }
+  .emaus-tab-list button[aria-selected='true'] { background: var(--brand-dark); color: var(--canvas); }
+  .emaus-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 2rem; padding: clamp(20px, 4vw, 36px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .emaus-panel + .emaus-panel { margin-top: 1.25rem; }
+  .emaus-groups[data-enhanced] .emaus-panel { margin-top: 0; }
+  .emaus-group-heading { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+  .emaus-group-logo { flex: 0 0 auto; width: clamp(72px, 10vw, 112px); height: auto; border-radius: 12px; }
+  .emaus-group-copy h3 { margin: 0; color: var(--brand-dark); font-family: 'Quattrocento', Georgia, serif; font-size: 30px; line-height: 1.2; }
+  .emaus-group-copy p { color: var(--muted); overflow-wrap: anywhere; }
+  .emaus-group-copy > p:last-child { margin-bottom: 0; }
+  .emaus-group-story, .emaus-coordinators { grid-column: 1 / -1; width: 100%; max-width: 760px; margin-inline: auto; }
+  .emaus-group-story p { margin: 0 0 1.25rem; color: var(--muted); line-height: 1.8; overflow-wrap: anywhere; }
+  .emaus-group-story p:last-child { margin-bottom: 0; }
+  .emaus-coordinators { padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .emaus-coordinators h4 { margin: 0 0 1rem; color: var(--brand-dark); font-family: 'Quattrocento', Georgia, serif; font-size: 24px; }
+  .emaus-coordinators dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 0; }
+  .emaus-coordinators dt { color: var(--brand); font-weight: 700; margin-bottom: .5rem; }
+  .emaus-coordinators dd { margin: 0; color: var(--muted); }
+  .emaus-group-copy .eyebrow { color: var(--brand); }
+  .emaus-group-photo { display: block; width: 100%; height: auto; border-radius: 12px; }
+  .emaus-photo-placeholder { display: grid; place-content: center; gap: .25rem; aspect-ratio: 4 / 3; padding: 1rem; border: 1px dashed var(--line); border-radius: 12px; background: var(--accent-soft); color: var(--muted); text-align: center; }
+  .emaus-photo-placeholder small { font-size: .8rem; }
+  @media (max-width: 720px) {
+    .emaus-panel { grid-template-columns: 1fr; gap: 1.25rem; }
+    .emaus-tab-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: .25rem; }
+    .emaus-tab-list button { padding-inline: .5rem; }
+    .emaus-coordinators dl { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-emaus-tabs]').forEach(root => {
+    const list = root.querySelector<HTMLElement>('[role="tablist"]');
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-emaus-panel]'));
+    if (!list || !tabs.length || tabs.length !== panels.length) return;
+
+    function selectTab(index: number, moveFocus = false) {
+      tabs.forEach((tab, tabIndex) => {
+        const selected = index === tabIndex;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[tabIndex].hidden = !selected;
+      });
+      if (moveFocus) tabs[index].focus();
+    }
+
+    tabs.forEach((tab, index) => {
+      panels[index].setAttribute('role', 'tabpanel');
+      panels[index].setAttribute('aria-labelledby', tab.id);
+      panels[index].tabIndex = 0;
+      tab.addEventListener('click', () => selectTab(index));
+      tab.addEventListener('keydown', event => {
+        let next: number;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        selectTab(next, true);
+      });
+    });
+    selectTab(0);
+    root.dataset.enhanced = '';
+    list.hidden = false;
+  });
+</script>

@@ -38,7 +38,7 @@ export const pastorals = [
 
 export const movements = [
 	{ title: 'ONDA', href: '/movimentos/onda/', description: 'Uma caminhada de fé e amizade para pré-adolescentes de 10 a 14 anos.' },
-	{ title: 'Emaús', href: '/movimentos/emaus/', description: 'Entre em contato com a secretaria para saber mais sobre o movimento e como participar.' },
+	{ title: 'Emaús', href: '/movimentos/emaus/', description: 'Formação cristã e vida em comunidade nos grupos Renova, Kerigma e Betânia.' },
 	{ title: 'Curso de Liderança Juvenil (CLJ)', href: '/pastorais/clj/', description: 'Encontros de fé, formação e ação para jovens.' },
 	{ title: 'Movimento de Casais Jovens (MCJ)', href: '/pastorais/mcj/', description: 'Espiritualidade, partilha e apoio à vida matrimonial e familiar.' },
 ];
